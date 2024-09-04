@@ -1,18 +1,7 @@
-const projectForm = document.getElementById('project-form');
-const projectNameInput = document.getElementById('project-name');
-const projectDescriptionInput = document.getElementById('project-description');
-const projectList = document.getElementById('project-list');
-
-
-function loadProjects() {
-    const storedProjects = localStorage.getItem('projects');
-    if (storedProjects) {
-        const projects = JSON.parse(storedProjects);
-        projects.forEach(project => {
-            appendProjectToList(project.Title, project.Description);
-        });
-    }
-}
+const projectForm = document.getElementById('project-form') as HTMLFormElement;
+const projectNameInput = document.getElementById('project-name') as HTMLInputElement;
+const projectDescriptionInput = document.getElementById('project-description') as HTMLTextAreaElement;
+const projectList = document.getElementById('project-list') as HTMLElement;
 
 
 projectForm.addEventListener('submit', (event) => {
@@ -21,28 +10,15 @@ projectForm.addEventListener('submit', (event) => {
     const projectName = projectNameInput.value;
     const projectDescription = projectDescriptionInput.value;
 
-   
-    const newProject = {
-        Id: Date.now(), 
-        Title: projectName,
-        Description: projectDescription
-    };
 
-   
-    appendProjectToList(newProject.Title, newProject.Description);
+    appendProjectToList(projectName, projectDescription);
 
-   
-    const storedProjects = localStorage.getItem('projects');
-    const projects = storedProjects ? JSON.parse(storedProjects) : [];
-    projects.push(newProject);
-    localStorage.setItem('projects', JSON.stringify(projects));
-
-   
+ 
     projectForm.reset();
 });
 
 
-function appendProjectToList(projectName, projectDescription) {
+function appendProjectToList(projectName: string, projectDescription: string) {
     const article = document.createElement('article');
     article.innerHTML = `
         <h3>${projectName}</h3>
@@ -51,5 +27,3 @@ function appendProjectToList(projectName, projectDescription) {
     projectList.appendChild(article);
 }
 
-
-loadProjects();
