@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f5;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#project-list {
+  margin-bottom: 40px;
+}
+
+.project-item {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+#project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#project-form input, #project-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#project-form button {
+  padding: 10px;
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#project-form button:hover {
+  background-color: #5a34a4;
+}
