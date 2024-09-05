@@ -4,16 +4,48 @@ const projectDescriptionInput = document.getElementById('project-description') a
 const projectList = document.getElementById('project-list') as HTMLElement;
 
 
-projectForm.addEventListener('submit', (event) => {
+const fetchProjects = async () => {
+    const response = await fetch("http://localhost:6969/json", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    const result = await response.json();
+
+    
+    projectList.innerHTML = '';
+
+  
+    result.allprojects.forEach((project: { Title: string, Description: string }) => {
+        appendProjectToList(project.Title, project.Description);
+    });
+};
+
+
+projectForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const projectName = projectNameInput.value;
     const projectDescription = projectDescriptionInput.value;
 
-
-    appendProjectToList(projectName, projectDescription);
-
  
+    await fetch("http://localhost:6969/create-project", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            Title: projectName,
+            Description: projectDescription,
+        }),
+    });
+
+    
+    fetchProjects();
+
+   
     projectForm.reset();
 });
 
@@ -27,3 +59,5 @@ function appendProjectToList(projectName: string, projectDescription: string) {
     projectList.appendChild(article);
 }
 
+
+fetchProjects();
